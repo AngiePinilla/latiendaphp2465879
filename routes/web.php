@@ -18,6 +18,46 @@ Route::get('/', function () {
 });
 //Primera ruta, se llama get se permiten mostrar en el navegador es un metodo estatico, solo se necesita el npmbre del metodo de la clase
 //tiene parametros, solocita el metodo get el nombre de la ruta
-Route::get('hola' , function(){
-             echo ("holi la primera ruta");
+//ruta de paises
+Route::get('paises' , function(){
+     $paises=[
+        "colombia"=>[
+            "Capital" => "Bogota",
+            "Moneda" => "Pesos",
+            "Poblacion" => 51.602,
+        "Ciudades"=>[
+            "Bogota",
+            "Cali",
+            "Barranquilla"
+        ]],
+         "peru"=>[
+            "Capital" => "Lima",
+            "Moneda" => "Guarani Paraguayo",
+            "Poblacion" => 37.97,
+            "Ciudades"=>[
+                "Lima",
+                "Cusco",
+                "Areequipa"
+            ]
+         ],
+         "paraguay"=>[
+            "Capital" => "Asuncion",
+            "Moneda" => "Pesos",
+            "Poblacion" => 7.133,
+            "Ciudades"=>[
+                "Asuncion",
+                "Encarnacion",
+                "Ciuad del este"
+            ]
+
+         ]
+     ];
+     //echo "<pre>";
+     //var_dump($paises);
+     //echo "<pre>";
+
+
+     //mostrar la vista de paises
+     return view('paises')->with("paises", $paises);
+
 });
