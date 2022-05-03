@@ -28,7 +28,8 @@ Route::get('paises' , function(){
         "Ciudades"=>[
             "Bogota",
             "Cali",
-            "Barranquilla"
+            "Barranquilla",
+            "Santa marta"
         ]],
          "peru"=>[
             "Capital" => "Lima",
@@ -37,7 +38,7 @@ Route::get('paises' , function(){
             "Ciudades"=>[
                 "Lima",
                 "Cusco",
-                "Areequipa"
+                "Arequipa"
             ]
          ],
          "paraguay"=>[
@@ -47,7 +48,7 @@ Route::get('paises' , function(){
             "Ciudades"=>[
                 "Asuncion",
                 "Encarnacion",
-                "Ciuad del este"
+                
             ]
 
          ]
