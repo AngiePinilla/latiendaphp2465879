@@ -5,11 +5,11 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Marca>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\categoria>
  */
-class MarcaFactory extends Factory 
+class CategoriaFactory extends Factory
 {
-    /**
+    /** 
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -17,7 +17,7 @@ class MarcaFactory extends Factory
     public function definition()
     {
         return [
-            'nombre_m'=>$this->faker->country()
+            'nombre' => $this->faker->city()//tipo de datos falsos
         ];
     }
 }

@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Marca;
+use App\Models\categoria;
+use Database\Factories\CategoriaFactory;
 
-class MarcaSeeder extends Seeder
+class CategoriaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +16,8 @@ class MarcaSeeder extends Seeder
      */
     public function run()
     {
-        Marca::factory(30)->create();
+        //lo que va a pasar en la factory
+        Categoria::factory(20)->create();
+
     }
 }
