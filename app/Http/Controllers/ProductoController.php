@@ -5,6 +5,7 @@ use App\Models\categoria;
 use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller 
 {
@@ -39,7 +40,36 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $r)
-    {
+    {   
+        //1. Definir reglas de validadcion
+        $reglas = [
+            "nombre" =>'required|alpha',
+            "desc" =>'required|min:10|max:50',
+            "precio" =>'required|numeric',
+            "marca" =>'required',
+            "categoria" => 'required' 
+        ];
+        //Mensajes pernosalizados
+        $mensajes = [
+            "required" => "Campo abligatorio",
+            "numeric" => "Solo numeros",
+            "alpha" => "solo letras",
+            "min" => "minimo 10 caracteres",
+            "max" => "maximo 50 caracteres"
+        ];
+        //Crear el objeto validador
+
+        $v = Validator::make($r->all(), $reglas, $mensajes);
+
+        //Validar datos : metodo fails()
+        //el metodo fails()-> retorna true en caso de que la validacion falle y falso en caso de vvalidadcion correcta
+        if($v->fails()){
+            //Validacion falla. Mostrar mensaje de validacion.Redireccionar al formulario
+            return redirect('productos/create')->withErrors($v)->withInput();
+        }else{
+            //Validacion correcta
+        
+
         //echo "<pre>";
         //var_dump($r->all());
         //echo "</pre>";
@@ -54,9 +84,12 @@ class ProductoController extends Controller
         $p->categoria_id = $r->categoria;
         //grabar el nuevo producto
         $p->save();
-        echo "El producto se ha guardado exitosamente";
+        //echo "El producto se ha guardado exitosamente";
         
+        //REDIRECCIONAR A LA RUTA : CREATE
 
+        return redirect('productos/create')->with('mensaje','Producto registrado');
+        }
     }
 
     /**
@@ -67,7 +100,7 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "aquie va la informacion del producto con id que es: $producto";
+        echo "aqui va la informacion del producto con id que es: $producto";
     }
 
     /**
