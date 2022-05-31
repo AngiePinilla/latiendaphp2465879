@@ -43,11 +43,12 @@ class ProductoController extends Controller
     {   
         //1. Definir reglas de validadcion
         $reglas = [
-            "nombre" =>'required|alpha',
+            "nombre" =>'required|alpha|unique:productos,nombre',
             "desc" =>'required|min:10|max:50',
             "precio" =>'required|numeric',
             "marca" =>'required',
-            "categoria" => 'required' 
+            "categoria" => 'required', 
+            "imagen" =>'required|image'
         ];
         //Mensajes pernosalizados
         $mensajes = [
@@ -55,7 +56,9 @@ class ProductoController extends Controller
             "numeric" => "Solo numeros",
             "alpha" => "solo letras",
             "min" => "minimo 10 caracteres",
-            "max" => "maximo 50 caracteres"
+            "max" => "maximo 50 caracteres",
+            "image" => "El archivo debe ser una imagen",
+            "unique" => "el nombre ya se encuentra registrado"
         ];
         //Crear el objeto validador
 
@@ -67,28 +70,34 @@ class ProductoController extends Controller
             //Validacion falla. Mostrar mensaje de validacion.Redireccionar al formulario
             return redirect('productos/create')->withErrors($v)->withInput();
         }else{
+            //Analizar el objeto file del request. Asignar a una variable nombre_archivo el nombre del archivo
+            $nombre_archivo = $r->imagen->getClientOriginalName();
+            $archivo = $r->imagen;
+            //mover el archivo en el carpeta public
+            $ruta = public_path().'/img';
+            $archivo->move($ruta, $nombre_archivo);
             //Validacion correcta
         
+            //echo "<pre>";
+            //var_dump($r->all());
+            //echo "</pre>";
 
-        //echo "<pre>";
-        //var_dump($r->all());
-        //echo "</pre>";
+            //asignar valores de atributos del nuevo atributo
+            $p = new Producto;
 
-        //asignar valores de atributos del nuevo atributo
-        $p = new Producto;
+            $p->nombre = $r->nombre;
+            $p->desc = $r->desc;
+            $p->precio = $r->precio;
+            $p->imagen = $nombre_archivo;
+            $p->marca_id = $r->marca;
+            $p->categoria_id = $r->categoria;
+            //grabar el nuevo producto
+            $p->save();
+            //echo "El producto se ha guardado exitosamente";
+            
+            //REDIRECCIONAR A LA RUTA : CREATE
 
-        $p->nombre = $r->nombre;
-        $p->desc = $r->desc;
-        $p->precio = $r->precio;
-        $p->marca_id = $r->marca;
-        $p->categoria_id = $r->categoria;
-        //grabar el nuevo producto
-        $p->save();
-        //echo "El producto se ha guardado exitosamente";
-        
-        //REDIRECCIONAR A LA RUTA : CREATE
-
-        return redirect('productos/create')->with('mensaje','Producto registrado');
+            return redirect('productos/create')->with('mensaje','Producto registrado');
         }
     }
 

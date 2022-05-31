@@ -7,9 +7,9 @@
     <h1 class=" deep-purple-text text-lighten-1 ">Nuevo producto</h1>
 </div>
 <div class="row">
-    <form class="col s8" method="post" action="{{ route('productos.store') }}"> {{--url('productos')--}}
+    <form class="col s8" method="post" action="{{ route('productos.store') }}" enctype="multipart/form-data"> {{--url('productos')--}}
         @csrf
-            {{--Nombre del producto--}}
+            {{--Nombre del producto--}} 
             <div class="row">
                 <div class="input-field col s8">
                     <label for="nombre">Nombre de producto</label>
@@ -37,13 +37,16 @@
             {{--Cargar Imagen--}}
             <div class="row">
                 <div class="file-field input-field col s8">
+                
                     <div class="btn blue accent-1">
                         <span>imagen...</span>
+                        
                         <input type="file" name="imagen">
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                     </div>
+                    <span>{{ $errors->first('imagen') }}</span>
                 </div>   
             </div>  
 
