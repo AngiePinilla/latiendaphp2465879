@@ -17,7 +17,7 @@
 
 <br><br>
 
-<table class="table table-bordered" width=50% height=300px>
+<table class="table table-bordered" width=50% height=300px> 
     <thead >   
     <tr class="table-info">
         <th >Pais</th>
