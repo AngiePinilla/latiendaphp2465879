@@ -39,15 +39,19 @@ class CartController extends Controller
         //estructurar la informacion del producto en un arreglo
 
         $producto = [
-            "nombre" => $request->prod_nom,
-            "id" => $request->prod_id,
-            "cantidad" => $request->cantidad
+            [
+                "nombre" => $request->prod_nom,
+                "id" => $request->prod_id,
+                "cantidad" => $request->cantidad,
+                "precio" => $request->prod_pre
+            ]
         ];
 
         if(!session('cart')){
             //no existe la variable session
              //crear variable session 'cart'
-            session([ 'cart' => $producto ]);
+             $auxiliar[] =$producto;
+            session([ 'cart' => $auxiliar ]);
         }else{
             //existe la variable session, extraer el contenido de la variable session 'cart
 
@@ -56,10 +60,12 @@ class CartController extends Controller
 
             $auxiliar[] =$producto;
             //volver a crear la variable session cart, con el contenido  añadido
-
+        
             session(['cart' => $auxiliar]);
 
         }
+
+        return redirect('productos') -> with('mensaje', 'Producto añadido al carrito');
 
        
 
@@ -115,5 +121,7 @@ class CartController extends Controller
         //Eliminar la session cart
 
         session()->forget('cart');
+
+        return redirect('cart')-> with('mensajes',"Carrito de compras eliminado");
     }
 }

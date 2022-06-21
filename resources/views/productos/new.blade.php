@@ -4,7 +4,7 @@
 
 
 <div class="row">
-    <h1 class=" deep-purple-text text-lighten-1 ">Nuevo producto</h1>
+    <h1 class="deep-purple-text lighten-2" style="font-family: 'Days One', sans-serif;" >Nuevo producto</h1>
 </div>
 <div class="row">
     <form class="col s8" method="post" action="{{ route('productos.store') }}" enctype="multipart/form-data"> {{--url('productos')--}}

@@ -20,7 +20,7 @@
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="{{ route('productos.index') }}">Inicio</a></li>
         <li><a href="{{ route('productos.create') }}">Registrar producto</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="{{ route('cart.index') }}">Carrito</a></li>
       </ul>
     </div>
   </nav>

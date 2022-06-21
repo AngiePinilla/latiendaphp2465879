@@ -2,6 +2,20 @@
 
 @section('contenido')
 
+@if(session('mensaje'))
+<div class="row">
+    <blockquote>
+    <strong>
+        <h3>{{ session('mensaje') }}
+        <a href="{{ route('cart.index') }}" >Ir al carrito</a></h3>
+        
+    </strong>
+    </blockquote>
+</div>
+@endif
+
+
+
 <div class="row">
     <h1 class="deep-purple-text lighten-2" style="font-family: 'Days One', sans-serif;"  >Catalogo de productos</h1>
 </div>
