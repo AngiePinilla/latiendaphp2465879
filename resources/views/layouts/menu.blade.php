@@ -16,10 +16,10 @@
     
  <nav>
     <div class="nav-wrapper deep-purple">
-      <a href="#" class="brand-logo center">Logo</a>
+      <a href="{{ route('productos.index') }}" class="brand-logo center">Tiendita</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
+        <li><a href="{{ route('productos.index') }}">Inicio</a></li>
+        <li><a href="{{ route('productos.create') }}">Registrar producto</a></li>
         <li><a href="collapsible.html">JavaScript</a></li>
       </ul>
     </div>
